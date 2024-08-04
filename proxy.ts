@@ -1,24 +1,21 @@
-import express from 'express';
-import axios from 'axios';
+import express from "express";
+import axios from "axios";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept'
-    );
-    next();
-  });
+app.use(cors());
 
-app.get('/fetch-data', async (req, res) => {
+app.get("/fetch-data", async (req, res) => {
   try {
-    const response = await axios.get('https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt');
+    const response = await axios.get(
+      "https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt"
+    );
     res.send(response.data);
-  } catch (error) {
-    res.status(500).send('Error fetching data');
+  } catch (error: any) {
+    console.error("Error fetching data: ", error);
+    res.status(500).send("Error fetching data: " + error.toString());
   }
 });
 
