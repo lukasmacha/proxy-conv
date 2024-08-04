@@ -1,1 +1,1 @@
-web: pwd && ls -l . && ls -l ./node_modules && ls -l ./node_modules && ls -l ./node_modules/ts-node && ./node_modules/.bin/ts-node proxy.ts
+web: ./node_modules/.bin/ts-node proxy.ts
